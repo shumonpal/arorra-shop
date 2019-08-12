@@ -1,0 +1,2 @@
+App Url: https://errora-shop.herokuapp.com/ 
+Heroku git url: https://git.heroku.com/errora-shop.git
