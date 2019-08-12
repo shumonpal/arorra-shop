@@ -1,0 +1,6 @@
+/* your styles go here */
+
+.p-inline p{
+    display: inline;
+    margin-left: 5px;
+}

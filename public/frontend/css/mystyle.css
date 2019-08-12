@@ -1,0 +1,26 @@
+
+.checkbox-color-filter {
+    border: 0;
+    width: 25px;
+    height: 25px;
+    margin-left: 5px !important;
+}
+.color-filter {
+    display: block;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    margin-bottom: -34px;
+}
+.active-color{
+  border: 2px solid #ff5063;
+}
+
+.qty ul li {
+  display: inline-block;
+}
+
+
+.color-green{
+  color:green;
+}
