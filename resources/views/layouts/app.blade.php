@@ -53,7 +53,7 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-@if (!Auth::guard('admin')->guest())
+@if (Auth::guard('admin')->guest())
     <div class="wrapper">
         <!-- Main Header -->
         <header class="main-header">
