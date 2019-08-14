@@ -40,7 +40,7 @@ class RegistrationController extends Controller
      */
     public function showRegiForm()
     {
-    	return view('auth.register');
+    	return view('auth.admins.register');
     }
 
     /**
@@ -66,7 +66,7 @@ class RegistrationController extends Controller
             'country' => 'string|max:1000',
             'state' => 'string|max:1000',
             'address' => 'string|max:1000',
-            'role' => 'integer|max:10',
+            //'role' => 'integer|max:10',
         ];
     }
 
@@ -88,7 +88,7 @@ class RegistrationController extends Controller
             'country' => $data['country'],
             'state' => $data['state'],
             'address' => $data['address'],
-            'role' => $data['role'],
+            //'role' => $data['role'],
         ]);
         $this->guard()->login($admin);
         return redirect($this->redirectTo);
