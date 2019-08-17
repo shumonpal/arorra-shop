@@ -29,10 +29,10 @@ class ComposerServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\ProductComposer'
         );
 
-        // View::composer(
-        //     ['index', 'frontend.header.header', 'frontend.products.products', 'admin.product.forms.form', 'admin.product.forms.formUpdate',],  
-        //     'App\Http\ViewComposers\CategoryComposer'
-        // );
+        View::composer(
+            ['products.fields', 'categories.table', 'subcategories.fields',],  
+            'App\Http\ViewComposers\CategoryComposer'
+        );
 
         View::composer(
             ['frontend.layouts.footer',],  

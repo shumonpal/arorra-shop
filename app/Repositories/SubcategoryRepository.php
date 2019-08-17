@@ -24,6 +24,7 @@ class SubcategoryRepository extends BaseRepository
         'descp'
     ];
 
+
     /**
      * Configure the Model
      **/
@@ -31,4 +32,6 @@ class SubcategoryRepository extends BaseRepository
     {
         return Subcategory::class;
     }
+
+
 }

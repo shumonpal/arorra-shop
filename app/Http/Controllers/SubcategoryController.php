@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use DB;
 
 class SubcategoryController extends AppBaseController
 {
@@ -58,6 +59,11 @@ class SubcategoryController extends AppBaseController
         $input = $request->all();
 
         $subcategory = $this->subcategoryRepository->create($input);
+
+        DB::table('category_subcategory')->insert([
+            'category_id' => $input['category_id'],
+            'subcategory_id' => $subcategory->id,
+            ]);
 
         return view('subcategories.table_row')->with('subcategory', $subcategory);
     }

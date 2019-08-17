@@ -149,7 +149,7 @@ function error(msg) {
             },
 
             error: function(errors){
-                error(msg);	
+                error('Somthing worng. Please try agin leter');	
                 // if (me.hasClass('cart')) {
                 //     $('.row-'+errors.responseText).fadeOut(200, function(){
                 //         $(this).remove();

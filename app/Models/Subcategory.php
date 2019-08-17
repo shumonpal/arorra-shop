@@ -45,8 +45,12 @@ class Subcategory extends Model
      */
     public static $rules = [
         'name' => 'required|min:2|max:50',
-        'descp' => 'nullable'
+        'descp' => 'nullable',
+        'category_id' => 'required',
     ];
+
+
+
 
     
 }

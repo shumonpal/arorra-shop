@@ -96,7 +96,7 @@ function()
 {
 	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 	Route::group(['prefix' => 'admin'],  function(){
-		//Route::group(['middleware' => ['admin']], function(){				
+		Route::group(['middleware' => ['admin']], function(){				
 			Route::get('/home', 'HomeController@index');
 			Route::get('/select', 'CategoryController@select')->name('select');				
 			Route::resource('categories', 'CategoryController');
@@ -107,7 +107,7 @@ function()
 
 			Route::resource('products', 'ProductController');
 			
-		//});
+		});
 	});
 });
 

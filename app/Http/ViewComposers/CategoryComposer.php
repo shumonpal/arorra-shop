@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\ViewComposers\Frontend;
+namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
-use App\Frontend\ProductsCategory;
+use App\Models\Category;
 
 /**
 * ProductComposer
@@ -14,7 +14,7 @@ class CategoryComposer {
 
 	public function compose(View $view)
 	{
-		$categories = ProductsCategory::latest()->get();
+		$categories = Category::latest()->get();
 		$view->with('categories', $categories);
 	}
 	
