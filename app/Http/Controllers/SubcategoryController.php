@@ -63,6 +63,8 @@ class SubcategoryController extends AppBaseController
         DB::table('category_subcategory')->insert([
             'category_id' => $input['category_id'],
             'subcategory_id' => $subcategory->id,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
             ]);
 
         return view('subcategories.table_row')->with('subcategory', $subcategory);

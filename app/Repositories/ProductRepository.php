@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Product;
 use InfyOm\Generator\Common\BaseRepository;
 use DB;
+use App\Traits\ImageTrait;
 
 /**
  * Class ProductRepository
@@ -17,6 +18,10 @@ use DB;
 */
 class ProductRepository extends BaseRepository
 {
+
+    use ImageTrait;
+
+    
     /**
      * @var array
      */

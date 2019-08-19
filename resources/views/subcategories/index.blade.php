@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-
+@section('css')
+    @include('layouts.datatables_css')
+@endsection
 
 @section('content')
     
@@ -32,4 +34,12 @@
     @include('vendor.flash.modal')
 @endsection
 
-
+@section('scripts')
+    @include('layouts.datatables_js')
+    <script>
+        $(function () {
+            $('table').DataTable();
+        });
+        
+    </script>
+@endsection

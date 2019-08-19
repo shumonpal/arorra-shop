@@ -6,7 +6,7 @@
     <div class="banner">
       <div class="main-banner owl-carousel">
       @foreach($products->where('is_featured', 1)->take(5) as $product)
-        <div class="item"><a href="#"><img src="{{ $product->banner_image }}" alt="Main Banner" class="img-responsive" /></a></div>
+        <div class="item"><a href="#"><img src="/{{ $product->banner_image }}" alt="Main Banner" class="img-responsive" /></a></div>
       @endforeach
       </div>
     </div>
