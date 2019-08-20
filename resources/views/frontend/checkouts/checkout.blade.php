@@ -326,9 +326,7 @@
                     <a href="{{route('cart')}}" class="btn" id="button-confirm">Review Order</a>
                     <div class="pull-right">
 
-                    @if(Auth::check())
-                        @include('frontend.checkouts.paystack', ['carts' => $carts])
-                    @endif    
+                       
                     </div>
                     </div>
                 </div>
