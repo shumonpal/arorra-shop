@@ -23,7 +23,7 @@ class ForntendController extends Controller
     
     public function productDetails(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
+        return $product = Product::findOrFail($id);
         if($request->ajax()){
             return view('frontend.modals.product_details_body', ['product' => $product]);
         }

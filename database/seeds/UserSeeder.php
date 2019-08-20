@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     {
         $names = ['user'];
     	for ($i=0; $i < 1; $i++) { 
-	    	DB::table('admins')->insert([
+	    	DB::table('users')->insert([
 	            'name' => $names[$i],
 		        'email' => $names[$i].'@arrora.com',
 		        'password' => bcrypt('123456'),
