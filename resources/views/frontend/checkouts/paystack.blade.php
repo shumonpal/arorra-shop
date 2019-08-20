@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
+
         <!-- <div class="row" style="margin-bottom:40px;">
           <div class="col-md-8 col-md-offset-2"> -->
             <input type="hidden" name="email" value="shumonbalok@gmail.com"> {{-- required --}}
@@ -15,4 +15,3 @@
                   class="btn" id="button-confirm" value="Confirm Order">
           <!-- </div>
         </div> -->
-</form>
