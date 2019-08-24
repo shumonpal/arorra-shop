@@ -17,7 +17,16 @@ class PaymentController extends Controller
      */
     public function redirectToGateway()
     {
-        return Paystack::getAuthorizationUrl()->redirectNow();
+         // computed amount -> $amount;
+        
+         $paystack = new Paystack();
+         $user = Auth::user();
+         $request->email = $user->email;
+         $request->amount = $amount;
+         $request->reference = $paystack->genTranxRef();
+         $request->key = config('paystack.secretKey');
+ 
+         return $paystack->getAuthorizationUrl()->redirectNow();
     }
 
     /**
