@@ -23,7 +23,7 @@ class PaymentController extends Controller
          $paystack = new Paystack();
          $user = Auth::user();
          $request->email = $user->email;
-         $request->amount = $amount;
+         $request->amount = 500;
          $request->reference = $paystack->genTranxRef();
          $request->key = config('paystack.secretKey');
  
