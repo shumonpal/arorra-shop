@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Unicodeveloper\Paystack\Paystack;
+use Paystack;
 use Auth;
 
 class PaymentController extends Controller

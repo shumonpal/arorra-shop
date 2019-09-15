@@ -274,7 +274,7 @@
             </div>
             <div class="panel panel-default ">
                 <div class="panel-heading">
-                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Step 5: Confirm Order {{session('payment_method') .'&&'. session('shipping_method') .'&&'. session('shipping_address')}}<i class="fa fa-caret-down"></i></a> </h4>
+                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Step 5: Confirm Order- {{ Paystack::genTranxRef() }}<i class="fa fa-caret-down"></i></a> </h4>
                 </div>
                 <div id="collapseFive" class="panel-collapse collapse {{ session('payment_method_temp') ? 'in' : '' }}">
                 <div class="panel-body">
