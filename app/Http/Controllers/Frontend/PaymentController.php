@@ -20,14 +20,14 @@ class PaymentController extends Controller
     {
          // computed amount -> $amount;
         
-         $paystack = new Paystack();
-         //$user = Auth::user();
-         //$request->email = 'shumonbalok@gmail.com';
-         //$request->amount = 500;
-         $request->reference = $paystack->genTranxRef();
-         $request->key = config('paystack.secretKey');
+         //$paystack = new Paystack();
+         $user = Auth::user();
+         $request->email = 'shumonbalok@gmail.com';
+         $request->amount = 500;
+        //  $request->reference = $paystack->genTranxRef();
+        //  $request->key = config('paystack.secretKey');
  
-         return $paystack->getAuthorizationUrl()->redirectNow();
+         return Paystack::getAuthorizationUrl()->redirectNow();
     }
 
     /**
