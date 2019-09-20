@@ -274,7 +274,7 @@
             </div>
             <div class="panel panel-default ">
                 <div class="panel-heading">
-                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Step 5: Confirm Order- {{ Paystack::genTranxRef() }}<i class="fa fa-caret-down"></i></a> </h4>
+                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Step 5: Confirm Order<i class="fa fa-caret-down"></i></a> </h4>
                 </div>
                 <div id="collapseFive" class="panel-collapse collapse {{ session('payment_method_temp') ? 'in' : '' }}">
                 <div class="panel-body">
@@ -327,7 +327,11 @@
                     <div class="pull-right">
 
                     @auth
+                    @if(session('payment_method') == 'paystack')
                         @include('frontend.checkouts.paystack', ['carts' => $carts])
+                    @elseif(session('payment_method') == 'paypal')
+                        @include('frontend.checkouts.paypal', ['carts' => $carts])
+                    @endif
                     @endauth    
                     </div>
                     </div>

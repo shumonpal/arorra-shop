@@ -57,6 +57,8 @@ function()
 			// Route::get('checkout-step-4', 'Frontend\CheckoutController@checkout4')->name('checkout4');
 			Route::post('/pay', 'Frontend\PaymentController@redirectToGateway')->name('pay'); 
 			Route::get('/payment/callback', 'Frontend\PaymentController@handleGatewayCallback');
+			Route::post('/payWithPaypal', 'Frontend\PaymentController@payWithPaypal')->name('payWithPaypal');
+			Route::get('/payWithPaypal/callback', 'Frontend\PaymentController@payWithPaypalCallback')->name('payWithPaypalCallback');
 		//});
 	//});
 

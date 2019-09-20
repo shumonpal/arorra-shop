@@ -185,6 +185,9 @@ return [
         //Paystack
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
 
+        //Srmklive\PayPal
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class
+
     ],
 
     /*
@@ -242,6 +245,8 @@ return [
 
         //Paystack
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
+        //paypal
+        'PayPal' => Srmklive\PayPal\Facades\PayPal::class
 
     ],
 
