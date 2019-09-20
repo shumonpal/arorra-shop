@@ -73,7 +73,7 @@ class PaymentController extends Controller
         $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
         $data['return_url'] = route('payWithPaypalCallback');
         $data['cancel_url'] = route('checkout1');
-        //return $data;
+        return $data;
         return $response = $provider->setExpressCheckout($data);
         return redirect($response['paypal_link']);
     }
