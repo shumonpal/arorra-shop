@@ -49,6 +49,22 @@ class PaymentController extends Controller
     public function payWithPaypal()
     {
         $provider = new ExpressCheckout();
+        return $data = $this->getRequestData();
+        //return $data;
+        $response = $provider->setExpressCheckout($data);
+        return redirect($response['paypal_link']);
+    }
+
+    public function payWithPaypalCallback(Request $request)
+    {
+        $provider = new ExpressCheckout();
+        $response = $provider->getExpressCheckoutDetails($request->token);
+
+
+    }
+
+    protected function getRequestData()
+    {
         $data = [];
         $data['items'] = [];
         foreach (Cart::instance('cart')->content() as $cart) {
@@ -64,7 +80,7 @@ class PaymentController extends Controller
         foreach($data['items'] as $item) {
             $total += $item['price']*$item['qty'];
         }
-        $data['total'] = $total;
+        $data['total'] = $total + Cart::instance('cart')->tax + session('shipping_method');
 
         //give a discount of 10% of the order amount
         $data['shipping_discount'] = 0.00;
@@ -74,15 +90,5 @@ class PaymentController extends Controller
         $data['return_url'] = route('payWithPaypalCallback');
         $data['cancel_url'] = route('checkout1');
         return $data;
-        return $response = $provider->setExpressCheckout($data);
-        return redirect($response['paypal_link']);
-    }
-
-    public function payWithPaypalCallback(Request $request)
-    {
-        $provider = new ExpressCheckout();
-        $response = $provider->getExpressCheckoutDetails($request->token);
-        //$response = $provider->getTransactionDetails($request->token);
-        dd($response);
     }
 }
