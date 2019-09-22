@@ -49,7 +49,7 @@ class PaymentController extends Controller
     public function payWithPaypal()
     {
         $provider = new ExpressCheckout();
-        return $data = $this->getRequestData();
+        $data = $this->getRequestData();
         //return $data;
         $response = $provider->setExpressCheckout($data);
         return redirect($response['paypal_link']);
