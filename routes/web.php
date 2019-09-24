@@ -59,6 +59,7 @@ function()
 			Route::get('/payment/callback', 'Frontend\PaymentController@handleGatewayCallback');
 			Route::post('/payWithPaypal', 'Frontend\PaymentController@payWithPaypal')->name('payWithPaypal');
 			Route::get('/payWithPaypal/callback', 'Frontend\PaymentController@payWithPaypalCallback')->name('payWithPaypalCallback');
+			Route::post('/payWithStripe', 'Frontend\PaymentController@payWithStripe')->name('payWithStripe');
 		//});
 	//});
 

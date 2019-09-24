@@ -256,6 +256,10 @@
                         <label>
                             <input type="radio" value="paystack" name="payment_method"> Paystack</label>
                         </div>
+                        <div class="radio">
+                        <label>
+                            <input type="radio" value="stripe" name="payment_method"> Stripe</label>
+                        </div>
                         <div class="buttons">
                         <div class="pull-right mt_20">I have read and agree to the <a class="agree" href="#"><b>Terms &amp; Conditions</b></a>
                             <input type="checkbox" value="1" name="agree"> &nbsp;
@@ -320,21 +324,27 @@
                         </tr>
                         </tfoot>
                     </table>
-                    </div>
 
-                    <div class="buttons">
-                    <a href="{{route('cart')}}" class="btn" id="button-confirm">Review Order</a>
-                    <div class="pull-right">
-
-                    @auth
-                    @if(session('payment_method') == 'paystack')
-                        @include('frontend.checkouts.paystack', ['carts' => $carts])
-                    @elseif(session('payment_method') == 'paypal')
-                        @include('frontend.checkouts.paypal', ['carts' => $carts])
+                    @if(session('payment_method') == 'stripe')
+                        @include('frontend.checkouts.stripe', ['carts' => $carts])
                     @endif
-                    @endauth    
                     </div>
+
+                    @if(!session('payment_method') == 'stripe')
+                    <div class="buttons">
+                        <a href="{{route('cart')}}" class="btn" id="button-confirm">Review Order</a>
+                        <div class="pull-right">
+
+                        @auth
+                        @if(session('payment_method') == 'paystack')
+                            @include('frontend.checkouts.paystack', ['carts' => $carts])
+                        @elseif(session('payment_method') == 'paypal')
+                            @include('frontend.checkouts.paypal', ['carts' => $carts])
+                        @endif
+                        @endauth    
+                        </div>
                     </div>
+                    @endif
                 </div>
                 </div>
             </div>

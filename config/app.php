@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -188,6 +188,8 @@ return [
         //Srmklive\PayPal
         Srmklive\PayPal\Providers\PayPalServiceProvider::class
 
+        //Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+
     ],
 
     /*
@@ -247,6 +249,8 @@ return [
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         //paypal
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class
+
+        //'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
 
     ],
 

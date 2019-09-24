@@ -4,8 +4,190 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "85b95d8f9354e5ad22992fb7079a5b63",
+    "content-hash": "b0bc3cadfad31168720338f8cc2a966e",
     "packages": [
+        {
+            "name": "cartalyst/collections",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cartalyst/collections.git",
+                "reference": "2b39755c52cb69e9ac4014891d857629f682da90"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cartalyst/collections/zipball/2b39755c52cb69e9ac4014891d857629f682da90",
+                "reference": "2b39755c52cb69e9ac4014891d857629f682da90",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "extra": {
+                "component": "package",
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cartalyst\\Collections\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cartalyst LLC",
+                    "email": "help@cartalyst.com"
+                },
+                {
+                    "name": "Bruno Gaspar",
+                    "email": "bruno.gaspar@cartalyst.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Dan Syme",
+                    "email": "dan.syme@cartalyst.com",
+                    "role": "Project Lead"
+                },
+                {
+                    "name": "Suhayb Wardany",
+                    "email": "su.wardany@cartalyst.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Collection Abstaction library for PHP.",
+            "keywords": [
+                "cartalyst",
+                "collections",
+                "php"
+            ],
+            "time": "2015-03-06T21:10:35+00:00"
+        },
+        {
+            "name": "cartalyst/stripe",
+            "version": "v2.2.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cartalyst/stripe.git",
+                "reference": "0d625ee120718fa74eeb51426a37970832c0a1af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cartalyst/stripe/zipball/0d625ee120718fa74eeb51426a37970832c0a1af",
+                "reference": "0d625ee120718fa74eeb51426a37970832c0a1af",
+                "shasum": ""
+            },
+            "require": {
+                "cartalyst/collections": "~1.0",
+                "guzzlehttp/guzzle": "~6.0",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "extra": {
+                "component": "package",
+                "branch-alias": {
+                    "dev-master": "2.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cartalyst\\Stripe\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cartalyst LLC",
+                    "email": "help@cartalyst.com",
+                    "homepage": "https://cartalyst.com"
+                }
+            ],
+            "description": "A comprehensive Stripe API package.",
+            "keywords": [
+                "cartalyst",
+                "php",
+                "stripe"
+            ],
+            "time": "2019-09-10T17:50:36+00:00"
+        },
+        {
+            "name": "cartalyst/stripe-laravel",
+            "version": "v7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cartalyst/stripe-laravel.git",
+                "reference": "8b74bef2763276e90318ca91beb4eb12d1d98df1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cartalyst/stripe-laravel/zipball/8b74bef2763276e90318ca91beb4eb12d1d98df1",
+                "reference": "8b74bef2763276e90318ca91beb4eb12d1d98df1",
+                "shasum": ""
+            },
+            "require": {
+                "cartalyst/stripe": "~2.0",
+                "illuminate/support": "5.5.*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "component": "implementation",
+                "branch-alias": {
+                    "dev-master": "7.0.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Cartalyst\\Stripe\\Laravel\\StripeServiceProvider"
+                    ],
+                    "aliases": {
+                        "Stripe": "Cartalyst\\Stripe\\Laravel\\Facades\\Stripe"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cartalyst\\Stripe\\Laravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cartalyst LLC",
+                    "email": "help@cartalyst.com",
+                    "homepage": "https://cartalyst.com"
+                }
+            ],
+            "description": "Laravel 5.5 integration for the Cartalyst Stripe package.",
+            "keywords": [
+                "cartalyst",
+                "laravel",
+                "php",
+                "stripe"
+            ],
+            "time": "2017-08-30T14:58:24+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
@@ -634,12 +816,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/InfyOmLabs/laravel-generator.git",
-                "reference": "6282f0e2ba6e7e71a1e28e855d19f56de13ea792"
+                "reference": "e24416977292806c21593fa68b92363c301b100e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/InfyOmLabs/laravel-generator/zipball/6282f0e2ba6e7e71a1e28e855d19f56de13ea792",
-                "reference": "6282f0e2ba6e7e71a1e28e855d19f56de13ea792",
+                "url": "https://api.github.com/repos/InfyOmLabs/laravel-generator/zipball/e24416977292806c21593fa68b92363c301b100e",
+                "reference": "e24416977292806c21593fa68b92363c301b100e",
                 "shasum": ""
             },
             "require": {
@@ -692,7 +874,7 @@
                 "test",
                 "view"
             ],
-            "time": "2019-09-15T06:14:33+00:00"
+            "time": "2019-09-19T11:53:55+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -1232,16 +1414,16 @@
         },
         {
             "name": "mcamara/laravel-localization",
-            "version": "1.4.1",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mcamara/laravel-localization.git",
-                "reference": "82d06c66cdf1e3ed17783842886d87cbd5aadd43"
+                "reference": "d228a61afd8cfe9eb7f8f7450acfa0371382407d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mcamara/laravel-localization/zipball/82d06c66cdf1e3ed17783842886d87cbd5aadd43",
-                "reference": "82d06c66cdf1e3ed17783842886d87cbd5aadd43",
+                "url": "https://api.github.com/repos/mcamara/laravel-localization/zipball/d228a61afd8cfe9eb7f8f7450acfa0371382407d",
+                "reference": "d228a61afd8cfe9eb7f8f7450acfa0371382407d",
                 "shasum": ""
             },
             "require": {
@@ -1290,7 +1472,7 @@
                 "localization",
                 "php"
             ],
-            "time": "2019-09-08T13:56:19+00:00"
+            "time": "2019-09-20T15:24:04+00:00"
         },
         {
             "name": "monolog/monolog",

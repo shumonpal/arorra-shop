@@ -10,6 +10,8 @@ use Paystack;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use Auth;
 use Cart;
+use Cartalyst\Stripe\Stripe;
+
 
 class PaymentController extends Controller
 {
@@ -63,6 +65,24 @@ class PaymentController extends Controller
 
     }
 
+
+    public function payWithStripe(Request $request)
+    {
+        
+        $stripe = Stripe::make('sk_test_eMHwh8GwaNAdhCyY5vVN30PC00Jq8ecRVh');
+        $charge = $stripe->charges()->create([
+            //'customer' => 'cus_4EBumIjyaKooft',
+            'amount'   => 50.49,
+            'currency' => 'USD',
+            'source' => $request->stripeToken,
+            'description' => 'order',
+            'receipt_email' => 'email@gmail.com',
+        ]);
+        
+        dd($charge);
+        return $request->all();
+    }
+
     protected function getRequestData()
     {
         $data = [];
@@ -91,4 +111,5 @@ class PaymentController extends Controller
         $data['cancel_url'] = route('checkout1');
         return $data;
     }
+    
 }
