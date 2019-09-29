@@ -120,7 +120,10 @@ class PaymentController extends Controller
             }
 
             DB::table('order_content')->insert($order_content);
-            
+
+            Cart::instance('cart')->destroy();
+            $request->session()->forget(['shipping_address', 'shipping_method', 'payment_method']);
+
             return redirect(route('user_order'))->with('success', 'Order Success! Thank you for shopping us.');
 
         } catch (Exception $e) {
