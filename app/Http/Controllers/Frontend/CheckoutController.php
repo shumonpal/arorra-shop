@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 
 
 
@@ -27,7 +28,7 @@ class CheckoutController extends Controller
 			elseif ($request->shipping_address) {
 				
 				if ($request->shipping_address == 'new') {
-					App\User::where('id', Auth::user()->id)
+					User::where('id', Auth::user()->id)
           				->update([
 							  'name' => $request->name,
 							  'phone' => $request->phone,
