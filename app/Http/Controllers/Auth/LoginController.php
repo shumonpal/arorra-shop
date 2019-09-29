@@ -38,7 +38,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    private function prevUrl()
+    private function redirectTo()
     {
         return  url()->previous();
     }
@@ -62,14 +62,6 @@ class LoginController extends Controller
      * @return void
      */
 
-    protected function sendLoginResponse(Request $request)
-    {
-        $request->session()->regenerate();
-
-        $this->clearLoginAttempts($request);
-
-        return $this->authenticated($request, $this->guard()->user())
-                ?: redirect($this->prevUrl());
-    }
+    
    
 }

@@ -101,7 +101,7 @@
 
                     <div class="radio">
                         <label>
-                        <input type="radio" checked="checked" value="existing" name="shipping_address"> I want to use an existing address</label>
+                        <input type="radio" checked="{{ session('shipping_address') == 'existing' ? 'checked' : ''}}" checked="checked" value="existing" name="shipping_address"> I want to use an existing address</label>
                     </div>
                     <div id="shipping-existing">
                         <select class="form-control" name="shipping_address">
@@ -110,7 +110,7 @@
                     </div>
                     <div class="radio">
                         <label>
-                        <input type="radio" value="new" name="shipping_address"> I want to use a new address</label>
+                        <input type="radio" checked="{{ session('shipping_address') == 'new' ? 'checked' : ''}}" value="new" name="shipping_address"> I want to use a new address</label>
                     </div>
                     <br>
                     <div id="shipping-new" style="display: none;">
@@ -206,15 +206,15 @@
                         <p><strong>Flat Rate</strong></p>
                         <div class="radio">
                         <label>
-                            <input type="radio" checked="checked" value="1" name="shipping_method"> Free Shipping Rate(within 20 dayes) - $0.00</label>
+                            <input type="radio" checked="{{session('shipping_method') == 1 ? 'checked' : ''}}" value="1" name="shipping_method"> Free Shipping Rate(within 20 dayes) - $0.00</label>
                         </div>
                         <div class="radio">
                         <label>
-                            <input type="radio" value="3" name="shipping_method"> Flat Shipping Rate(within 10 dayes) - $3.00</label>
+                            <input type="radio" checked="{{session('shipping_method') == 3 ? 'checked' : ''}}" value="3" name="shipping_method"> Flat Shipping Rate(within 10 dayes) - $3.00</label>
                         </div>
                         <div class="radio">
                         <label>
-                            <input type="radio" value="7" name="shipping_method"> Flat Shipping Rate(within 5 dayes) - $7.00</label>
+                            <input type="radio" checked="{{session('shipping_method') == 7 ? 'checked' : ''}}" value="7" name="shipping_method"> Flat Shipping Rate(within 5 dayes) - $7.00</label>
                         </div>
                         <p><strong>Add Comments About Your Order</strong></p>
                         <p>
@@ -239,7 +239,7 @@
                 <div class="panel-heading">
                 <h4 class="panel-title {{ session('payment_method') && Auth::check() ? 'color-green' : ''}}"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Step 4: Payment Method <i class="fa fa-caret-down"></i>@if(session('payment_method') && Auth::check())<i class="fa fa-check pull-right"></i>@endif</a> </h4>
                 </div>
-                <div id="collapseFour" class="panel-collapse collapse {{ session('shopping_method_temp') ? 'in' : '' }}">
+                <div id="collapseFour" class="panel-collapse collapse {{ session('shipping_method_temp') ? 'in' : '' }}">
                 <div class="panel-body">
                     <form class="form-horizontal" method="post" action="{{ route('checkout2') }}">
                         {!! csrf_field() !!}

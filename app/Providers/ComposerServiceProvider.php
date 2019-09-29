@@ -25,17 +25,19 @@ class ComposerServiceProvider extends ServiceProvider
     public function register()
     {
         View::composer(
-            'frontend.index',  
+            ['frontend.index', 'frontend.layouts.header'],
             'App\Http\ViewComposers\ProductComposer'
         );
 
         View::composer(
-            ['products.fields', 'categories.table', 'subcategories.fields',],  
+            ['products.fields', 'categories.table', 'subcategories.fields',
+             'frontend.layouts.header', 'frontend.shops.shop'
+            ],  
             'App\Http\ViewComposers\CategoryComposer'
         );
 
         View::composer(
-            ['frontend.layouts.footer',],  
+            ['frontend.layouts.footer', 'frontend.layouts.header'],  
             'App\Http\ViewComposers\BrandComposer'
         );
 

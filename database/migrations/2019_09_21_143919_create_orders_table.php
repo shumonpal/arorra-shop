@@ -21,8 +21,6 @@ class CreateOrdersTable extends Migration
             $table->text('invoice_description')->nullable();
             $table->integer('discount')->nullable();
             $table->string('payer_email')->nullable();
-            $table->string('color')->nullable();
-            $table->string('size')->nullable();
             $table->integer('status')->default(0);
             $table->string('pay_method');
             $table->string('shipping_method');

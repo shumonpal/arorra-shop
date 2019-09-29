@@ -23,6 +23,9 @@
                 <li class="account dropdown"> <span class="dropdown-toggle" id="dropdownMenu01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">Hi {{title_case(Auth::user()->name)}}! <span class="caret"></span> </span>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu01">
                     <li><a href="#">Profile</a></li>
+                    <li><a href="{{route('cart')}}">Cart</a></li>
+                    <li><a href="{{route('wishlist')}}">Wishlist</a></li>
+                    <li><a href="{{route('user_order')}}">Orders</a></li>
                     <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}

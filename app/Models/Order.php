@@ -35,8 +35,6 @@ class Order extends Model
         'invoice_description',
         'discount',
         'payer_email',
-        'color',
-        'size',
         'status',
         'pay_method',
         'shipping_method',
@@ -56,8 +54,6 @@ class Order extends Model
         'invoice_description' => 'string',
         'discount' => 'integer',
         'payer_email' => 'string',
-        'color' => 'string',
-        'size' => 'string',
         'status' => 'integer',
         'pay_method' => 'string',
         'shipping_method' => 'string',
@@ -77,6 +73,30 @@ class Order extends Model
         'shipping_method' => 'required',
         'total' => 'required',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function products()
+    {
+        return $this->hasMany('App\Models\OrderContent');
+    }
+
+    public function getStatusAttribute($value)
+    {
+        if ($value == 1) {
+            $value = 'Order Complated';
+        }elseif ($value == 2) {
+            $value = 'Order Packing';
+        }elseif ($value == 3) {
+            $value = 'Order Shifted';
+        }elseif ($value == 4) {
+            $value = 'Order Received';
+        }
+        return $value;
+    }
 
     
 }

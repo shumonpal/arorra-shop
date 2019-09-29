@@ -23,7 +23,7 @@ class ForntendController extends Controller
     
     public function productDetails(Request $request, $id)
     {
-        return $product = Product::findOrFail($id);
+        $product = Product::findOrFail($id);
         if($request->ajax()){
             return view('frontend.modals.product_details_body', ['product' => $product]);
         }
@@ -47,5 +47,18 @@ class ForntendController extends Controller
     public function userLogin()
     {
         return view('frontend.modals.user_login');
+    }
+
+    public function shop(Request $request)
+    {
+        if ($request->queryBy == "all") {
+            $products = Product::orderByDesc('id')->paginate(12);
+        }else{
+            $queryStr =  str_after($request->fullUrl(), '?');
+            $data = explode('=', $queryStr );
+
+            $products = Product::where($data[0], $data[1])->latest()->paginate(12);
+        }
+        return view('frontend.shops.shop', compact('products'));
     }
 }

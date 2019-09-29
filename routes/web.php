@@ -35,6 +35,8 @@ function()
 	});
 	Route::get('/', 'Frontend\ForntendController@index');
 	Route::get('/productDetails/{id}', 'Frontend\ForntendController@productDetails')->name('productDetails');
+	Route::get('shop', 'Frontend\ForntendController@shop')->name('shop');
+	
 	//users login/registration
 	//Route::get('user_login', 'ForntendController@userLogin')->name('user_login');
 
@@ -62,9 +64,18 @@ function()
 			Route::post('/payWithStripe', 'Frontend\PaymentController@payWithStripe')->name('payWithStripe');
 		//});
 	//});
+	Route::group(['middleware' => 'auth'], function(){
+		Route::get('/orders', 'Frontend\UserController@orders')->name('user_order');
+	});
 
 	
 });
+
+
+
+
+
+
 
 /**------------------------------
 *

@@ -24,3 +24,15 @@
 .color-green{
   color:green;
 }
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.shop-page-product .product-thumb .product-imageblock a{
+  height: 300px;
+}
