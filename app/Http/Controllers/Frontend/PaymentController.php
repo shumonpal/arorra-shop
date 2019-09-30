@@ -76,7 +76,7 @@ class PaymentController extends Controller
             $price = $carts->implode('price', ', ');
             $qty = $carts->implode('qty', ', ');
     
-            return $stripe = Stripe::make('sk_test_eMHwh8GwaNAdhCyY5vVN30PC00Jq8ecRVh');
+            $stripe = Stripe::make('sk_test_eMHwh8GwaNAdhCyY5vVN30PC00Jq8ecRVh');
     
             $charge = $stripe->charges()->create(
             [
