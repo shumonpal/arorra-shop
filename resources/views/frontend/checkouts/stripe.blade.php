@@ -119,14 +119,14 @@ var form = document.getElementById('payment-form');
 form.addEventListener('submit', function(event) {
   event.preventDefault();
 
-  var options = {
-    name:'{{Auth::user()->name}}',
-    email:'{{Auth::user()->email}}',
-    phone:'{{Auth::user()->phone}}',
-    address:'324 holland-breeze, stomper #23-43',
-  }
+  // var options = {
+  //   name:'{{Auth::user()->name}}',
+  //   email:'{{Auth::user()->email}}',
+  //   phone:'{{Auth::user()->phone}}',
+  //   address:'324 holland-breeze, stomper #23-43',
+  // }
 
-  stripe.createToken(card, options).then(function(result) {
+  stripe.createToken(card).then(function(result) {
     if (result.error) {
       // Inform the user if there was an error.
       var errorElement = document.getElementById('card-errors');
