@@ -76,21 +76,20 @@ class PaymentController extends Controller
             $price = $carts->implode('price', ', ');
             $qty = $carts->implode('qty', ', ');
     
-            $stripe = Stripe::make(env('STRIPE_SECRET'));
+            return $stripe = Stripe::make(env('STRIPE_SECRET'));
     
             $charge = $stripe->charges()->create(
             [
-                // 'amount'   => Cart::instance('cart')->total,
-                'amount'   => 80450,
+                'amount'   => Cart::instance('cart')->total,
                 'currency' => 'USD',
                 'source' => $request->stripeToken,
                 'description' => 'order',
-                'receipt_email' => 'email@mail.com',
-                // 'metadata' => [
-                //         'products' => $name,
-                //         'price' => $price,
-                //         'qty' => $qty,                    
-                //     ]
+                'receipt_email' => auth()->user()->email,
+                'metadata' => [
+                        'products' => $name,
+                        'price' => $price,
+                        'qty' => $qty,                    
+                    ]
                 
             ]);
             
