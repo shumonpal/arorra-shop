@@ -80,16 +80,17 @@ class PaymentController extends Controller
     
             $charge = $stripe->charges()->create(
             [
-                'amount'   => Cart::instance('cart')->total,
+                // 'amount'   => Cart::instance('cart')->total,
+                'amount'   => 80450,
                 'currency' => 'USD',
                 'source' => $request->stripeToken,
                 'description' => 'order',
-                'receipt_email' => auth()->user()->email,
-                'metadata' => [
-                        'products' => $name,
-                        'price' => $price,
-                        'qty' => $qty,                    
-                    ]
+                'receipt_email' => 'email@mail.com',
+                // 'metadata' => [
+                //         'products' => $name,
+                //         'price' => $price,
+                //         'qty' => $qty,                    
+                //     ]
                 
             ]);
             

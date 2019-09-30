@@ -33,6 +33,7 @@ return [
         'model' => App\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
+        'version' => '2016-07-06',
     ],
 
 ];
