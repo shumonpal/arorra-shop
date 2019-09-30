@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->string('payer_id')->nullable();
             $table->integer('user_id');
-            $table->string('invoice_id');
+            $table->string('invoice_id')->nullable();
             $table->text('invoice_description')->nullable();
             $table->integer('discount')->nullable();
             $table->string('payer_email')->nullable();
