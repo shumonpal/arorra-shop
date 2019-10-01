@@ -330,7 +330,7 @@
                     @endif
                     </div>
 
-                    @if(!session('payment_method') == 'stripe')
+                    @if(session('payment_method') == 'paypal' || session('payment_method') == 'paystack')
                     <div class="buttons">
                         <a href="{{route('cart')}}" class="btn" id="button-confirm">Review Order</a>
                         <div class="pull-right">

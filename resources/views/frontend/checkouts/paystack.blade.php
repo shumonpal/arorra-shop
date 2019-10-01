@@ -7,7 +7,7 @@
             <input type="hidden" name="amount" value="45363"> {{-- required in kobo --}}
             <input type="hidden" name="quantity" value="3">
             <input type="hidden" name="metadata" value="{{ json_encode($array = ['user_id' => Auth::user()->id]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
-            <input type="hidden" name="reference" value="#475497htbr"> {{-- required --}}
+            <input type="hidden" name="reference" value="475497htbr"> {{-- required --}}
             <!-- <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}} -->
             <input type="hidden" name="key" value="pk_test_a664c7c289b5577970604c5f988265d4778f75ed"> {{-- required --}}
             {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
