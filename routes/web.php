@@ -35,7 +35,8 @@ function()
 	});
 	Route::get('/', 'Frontend\ForntendController@index');
 	Route::get('/productDetails/{id}', 'Frontend\ForntendController@productDetails')->name('productDetails');
-	Route::get('shop', 'Frontend\ForntendController@shop')->name('shop');
+	Route::match(['get', 'post'], '/shop', 'Frontend\ForntendController@shop')->name('shop');
+	//Route::get('/shop/product-filter', 'Frontend\ForntendController@productFilter')->name('product-filter');
 	
 	//users login/registration
 	//Route::get('user_login', 'ForntendController@userLogin')->name('user_login');

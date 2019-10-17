@@ -30,7 +30,7 @@
                       <ul>
                         <li class="dropdown-header">{{$category->name}}</li>
                         @foreach($category->subcategories as $subcategory)
-                        <li><a href="{{ route('shop', ['subcategory_id' => $subcategory->id]) }}">{{title_case($subcategory->name)}}</a></li>
+                        <li><a href="{{ route('shop', ['id' => 'subcategory_id-' . $subcategory->id]) }}">{{title_case($subcategory->name)}}</a></li>
                         @endforeach
                       </ul>
                     </li>
@@ -57,7 +57,7 @@
                 <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brand </a>
                   <ul class="dropdown-menu">
                   @foreach($brands as $brand)
-                    <li> <a href="{{ route('shop', ['brand_id' => $brand->id]) }}">{{ title_case($brand->name) }}</a></li>
+                    <li> <a href="{{ route('shop', ['id' => 'brand_id-' . $brand->id]) }}">{{ title_case($brand->name) }}</a></li>
                   @endforeach
                   </ul>
                 </li>

@@ -271,7 +271,7 @@ function showConfirmModal(title, url){
                 if (cartCounter < 1) {
                     $('.cart-main').addClass('hidden');
                     $('.alert-warning').fadeIn(400, function(){
-                    $(this).removeClass('hidden');
+                        $(this).removeClass('hidden');
                     });
                 }
 			},
@@ -288,5 +288,87 @@ function showConfirmModal(title, url){
         
 
 			
-	});
+    });
+
+
+    $('.checkbox-color-filter').on('click', function(evt) {
+        var me  = $(this);
+        me.addClass('color');
+        $("input").filter(".checkbox-color-filter").not(me).removeClass('color');
+        //console.log($('.color').val())
+    });
+
+    $('.filter-size').on('click', function(evt) {
+        var me  = $(this);
+        me.addClass('size');
+        $("input").filter(".filter-size").not(me).removeClass('size');
+        //console.log($('.size').val())
+    });
+    
+
+    /*------------------------------------------
+	               products filter
+	 -------------------------------------------*/
+	$('body').on('click','.refine-products', function(evt) {
+        evt.preventDefault();
+        
+		//alert($("input[name=my_range]").val());
+		var me = $(this),
+			url = me.data('url'),
+			price = $("input[name=my_range]").val(),
+			color = $('.color').val();
+            size = $('.size').val(),
+            
+            ChangeUrl('url', url+'&price='+price+'&color='+color+'&size='+size);
+            location.reload();	
+            
+            ChangeUrl('url', "/");
+
+		
+
+    });
+    
+    // $('body').on('change', '.select_item', function(evt) {
+	// 	evt.preventDefault();
+       
+	// 	var me = $(this),
+	// 		url = me.data('url'),
+	// 		href = me.data('href'),
+	// 		//color = $('.active-color').val(),
+	// 		//min = $('.irs-from').text(),
+	// 		//max = $('.irs-to').text(),
+    //         limit = $('#input-limit').val();
+    //         orderBy = $(this).val();
+
+            
+
+	// 	$.ajax({
+	// 		url: href,
+	// 		dataType: 'html',
+	// 		data: {'url':url, 'limit':limit, 'orderBy':orderBy},
+	// 		success: function (response) {
+    //             //alert(response);
+    //             $('#products-body').html(response);	
+                	
+    //             //ChangeUrl('url', url+'&orderBy='+orderBy);
+	// 		},
+	// 		error: function(errors){
+	// 			iziToast.warning({
+    //                 title: 'Sorry',
+    //                 message: 'Sonthing going wrong. Please try again letter!',
+    //             });
+	// 		}
+	// 	});
+		
+    // });
+    
+
+    function ChangeUrl(title, url) {
+        if (typeof (history.pushState) != "undefined") {
+            var obj = { Title: title, Url: url };
+            history.pushState(obj, obj.Title, obj.Url);
+        } else {
+            alert("Browser does not support HTML5.");
+        }
+    }
    

@@ -31,7 +31,7 @@ class ComposerServiceProvider extends ServiceProvider
 
         View::composer(
             ['products.fields', 'categories.table', 'subcategories.fields',
-             'frontend.layouts.header', 'frontend.shops.shop'
+             'frontend.layouts.header', 'frontend.left_column.categories'
             ],  
             'App\Http\ViewComposers\CategoryComposer'
         );
