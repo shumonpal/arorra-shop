@@ -101,7 +101,7 @@
 
                     <div class="radio">
                         <label>
-                        <input type="radio" checked="{{ session('shipping_address') == 'existing' ? 'checked' : ''}}" checked="checked" value="existing" name="shipping_address"> I want to use an existing address</label>
+                        <input type="radio" {{ session('shipping_address') == 'existing' ? 'checked="checked"' : ''}}  value="existing" name="shipping_address"> I want to use an existing address</label>
                     </div>
                     <div id="shipping-existing">
                         <select class="form-control" name="shipping_address">
@@ -110,7 +110,7 @@
                     </div>
                     <div class="radio">
                         <label>
-                        <input type="radio" checked="{{ session('shipping_address') == 'new' ? 'checked' : ''}}" value="new" name="shipping_address"> I want to use a new address</label>
+                        <input type="radio" {{ session('shipping_address') == 'new' ? 'checked="checked"' : ''}} value="new" name="shipping_address"> I want to use a new address</label>
                     </div>
                     <br>
                     <div id="shipping-new" style="display: none;">
@@ -246,19 +246,19 @@
                         <p>Please select the preferred payment method to use on this order.</p>
                         <div class="radio">
                         <label>
-                            <input type="radio" checked="checked" value="cash" name="payment_method"> Cash On Delivery </label>
+                            <input type="radio" value="cash" name="payment_method" {{ session('payment_method') == 'cash' ? 'checked="checked"' : ''}}> Cash On Delivery </label>
                         </div>
                         <div class="radio">
                         <label>
-                            <input type="radio" value="paypal" name="payment_method"> PayPal</label>
+                            <input type="radio" value="paypal" name="payment_method" {{ session('payment_method') == 'paypal' ? 'checked="checked"' : ''}}> PayPal</label>
                         </div>
                         <div class="radio">
                         <label>
-                            <input type="radio" value="paystack" name="payment_method"> Paystack</label>
+                            <input type="radio" value="paystack" name="payment_method" {{ session('payment_method') == 'paystack' ? 'checked="checked"' : ''}}> Paystack</label>
                         </div>
                         <div class="radio">
                         <label>
-                            <input type="radio" value="stripe" name="payment_method"> Stripe</label>
+                            <input type="radio" value="stripe" name="payment_method" {{ session('payment_method') == 'stripe' ? 'checked="checked"' : ''}}> Stripe</label>
                         </div>
                         <div class="buttons">
                         <div class="pull-right mt_20">I have read and agree to the <a class="agree" href="#"><b>Terms &amp; Conditions</b></a>

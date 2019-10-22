@@ -24,7 +24,7 @@ class CreateOrdersTable extends Migration
             $table->integer('status')->default(0);
             $table->string('pay_method');
             $table->string('shipping_method');
-            $table->integer('total');
+            $table->string('total');
             $table->timestamps();
             $table->softDeletes();
         });

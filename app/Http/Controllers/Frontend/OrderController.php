@@ -52,7 +52,7 @@ class OrderController extends Controller
             }
             DB::table('orders')->insert($orders);
             Cart::instance('cart')->destroy();
-            $request->session()->forget(['delivery', 'payment']);
+            $request->session()->forget(['shipping_address', 'shipping_method', 'shipping_method_cmnt', 'payment_method'
             return redirect(route('orders'))->with('success', 'Your order is complated! Thank you for shopping with us!');
         }
         

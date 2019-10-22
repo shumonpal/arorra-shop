@@ -55,63 +55,17 @@ class ForntendController extends Controller
     {
         
         if ($request->queryBy == "all") {
-            $products = Product::orderByDesc('id')->paginate(9);
-            if ($request->price) {
-                $range = explode( ';', $request->price );
-                $minPrice = intval($range[0]);
-                $maxPrice = intval($range[1]);
 
-                if (($request->color == null) && ($request->size == null)) {
-                    $products = Product::whereBetween('price', [$minPrice, $maxPrice])->orderByDesc('id')->paginate(9);
-                    
-                }elseif(($request->color == null) && ($request->size != null)){
-                    $pdtIdInSize = $this->pdtIdInSize($request->size);
-                    $products = Product::whereIn('id', $pdtIdInSize)->whereBetween('price', [$minPrice, $maxPrice])
-                                ->orderByDesc('id')->paginate(9);
-                    
+            $products = $this->productsQueryByAll($request);
 
-                }elseif(($request->color != null) && ($request->size == null)){
-                    $pdtIdInColor = $this->pdtIdInColor($request->color);
-                    $products = Product::whereIn('id', $pdtIdInColor)->whereBetween('price', [$minPrice, $maxPrice])
-                                ->orderByDesc('id')->paginate(9);
-
-                }elseif(($request->color != null) && ($request->size != null)){
-                    $pdtIdInSize = $this->pdtIdInSize($request->size);
-                    $pdtIdInColor = $this->pdtIdInColor($request->color);
-                    $products = Product::whereIn('id', $pdtIdInColor)->whereIn('id', $pdtIdInSize)->whereBetween('price', [$minPrice, $maxPrice])
-                                ->orderByDesc('id')->paginate(9);
-
-                }
-                //$products = Product::orderByDesc('id')->paginate(9);
-             }
         }else{
             
-            $where = explode( '-', $request->id );
+            $products = $this->productsQueryByNotAll($request);
 
-            if ($request->orderBy) {
-                $orderBy = explode( '-', $request->orderBy );
-                $products = Product::where($where[0], $where[1])->orderBy($orderBy[0], $orderBy[1])->paginate(9);
-            }else{
-                $products = Product::where($where[0], $where[1])->latest()->paginate(9);
-            }
-
-           // $queryStr =  str_after($request->fullUrl(), '?');
-
-            // if ($request->ajax() && $request->url) {
-            //     $queryStr =  str_after($request->url, '?');
-            // }
-            // $data = explode('=', $queryStr );
-            // if ($request->orderBy) {
-            //     $orderBy = explode( '-', $request->orderBy );
-            //     $products = Product::where($data[0], $data[1])->orderBy($orderBy[0], $orderBy[1])->paginate(9);
-            // }else {
-                
-            //     $products = Product::where($data[0], $data[1])->latest()->paginate(9);
-            // }
         }
         
         if ( $request->ajax() ) {
-            //return $request->all();
+
     		$view = view('frontend.shops.products', ['products' => $products])->render();
             return [
                     'html'=> $view,
@@ -138,39 +92,241 @@ class ForntendController extends Controller
     }
 
 
-
-    public function productFilter(Request $request)
+    private function productsQueryByAll($request)
     {
-        //return $request->orderBy;
-        $queryStr =  str_after($request->url, '?');
-        $data = explode( '=', $queryStr );
-        $orderBy = explode( '-', $request->orderBy );
-        //return $data[0];
-        if ($data[1] == 'all') {
-            $products = Product::orderBy($orderBy[0], $orderBy[1])->paginate(9);
-        }else{
-            $products = Product::where($data[0], $data[1])->orderBy($orderBy[0], $orderBy[1])->paginate(9);
-            
+        $products = Product::orderByDesc('id')->paginate(9);
+
+        if ($request->sort) {
+            $orderBy = explode( '-', $request->sort );
         }
-        
-        if ($request->ajax()) {
-            if ($request->orderBy) {
-                return $view = view('frontend.shops.products', ['products' => $products]);
+
+        if ($request->price) {
+            $range = explode( ';', $request->price );
+            $minPrice = intval($range[0]);
+            $maxPrice = intval($range[1]);
+           
+            if (($request->color == null) && ($request->size == null)) {
+                $products = Product::whereBetween('price', [$minPrice, $maxPrice])->orderByDesc('id')->paginate(9);
+                if ($request->sort) {                    
+                    $products = Product::whereBetween('price', [$minPrice, $maxPrice])
+                    ->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+                }
+                
+            }elseif(($request->color == null) && ($request->size != null)){
+                $pdtIdInSize = $this->pdtIdInSize($request->size);
+                $products = Product::whereIn('id', $pdtIdInSize)->whereBetween('price', [$minPrice, $maxPrice])
+                            ->orderByDesc('id')->paginate(9);
+                if ($request->sort) {                    
+                    $products =Product::whereIn('id', $pdtIdInSize)->whereBetween('price', [$minPrice, $maxPrice])
+                    ->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+                }
+
+            }elseif(($request->color != null) && ($request->size == null)){
+                $pdtIdInColor = $this->pdtIdInColor($request->color);
+                $products = Product::whereIn('id', $pdtIdInColor)->whereBetween('price', [$minPrice, $maxPrice])
+                            ->orderByDesc('id')->paginate(9);
+                if ($request->sort) {                    
+                    $products =Product::whereIn('id', $pdtIdInColor)->whereBetween('price', [$minPrice, $maxPrice])
+                    ->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+                }
+
+            }elseif(($request->color != null) && ($request->size != null)){
+                $pdtIdInSize = $this->pdtIdInSize($request->size);
+                $pdtIdInColor = $this->pdtIdInColor($request->color);
+                $products = Product::whereIn('id', $pdtIdInColor)->whereIn('id', $pdtIdInSize)
+                            ->whereBetween('price', [$minPrice, $maxPrice])
+                            ->orderByDesc('id')->paginate(9);
+                if ($request->sort) {                    
+                    $products = Product::whereIn('id', $pdtIdInColor)->whereIn('id', $pdtIdInSize)
+                                ->whereBetween('price', [$minPrice, $maxPrice])
+                                ->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+                }
+
             }
-    		$view = view('frontend.shops.products', ['products' => $products])->render();
-            return response()->json(['html'=>$view]);
+            //$products = Product::orderByDesc('id')->paginate(9);
         }
-        
-        // }else{
-        //    $pdtByColor = ProductsColor::where('color', $request->color)->get();
-        //    $unique_pdtId = $pdtByColor->unique('products_id');
-        //    $pdtId = $unique_pdtId->pluck('products_id'); 
 
-        //    $productBy = Product::whereIn('id', $pdtId)->where($data[0], $data[1])->whereBetween('price', [$request->min, $request->max])->orderBy($sort[0], $sort[1])->get();
-
-        //}
+        return $products;
 
         
-        //return view('frontend.shops.products', ['products' => $products]);
     }
-}
+
+
+    private function productsQueryByNotAll($request)
+    {
+        $where = explode( '-', $request->id );
+
+        if ($request->sort) {
+            $orderBy = explode( '-', $request->sort );
+        }
+
+        if ($request->orderBy) {
+            
+            $products = $this->productsQueryByNotAllButOrderBy($request, $where, $orderBy);
+            
+        }else{
+
+            $products = Product::where($where[0], $where[1])->latest()->paginate(9);
+            if ($request->price) {
+                $range = explode( ';', $request->price );
+                $minPrice = intval($range[0]);
+                $maxPrice = intval($range[1]);
+
+                if (($request->color == null) && ($request->size == null)) {
+                    $products = Product::where($where[0], $where[1])->whereBetween('price', [$minPrice, $maxPrice])
+                                ->orderByDesc('id')->paginate(9);
+                    if ($request->sort) {                    
+                        $products = Product::where($where[0], $where[1])->whereBetween('price', [$minPrice, $maxPrice])
+                        ->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+                    }
+                    
+                }elseif(($request->color == null) && ($request->size != null)){
+                    $pdtIdInSize = $this->pdtIdInSize($request->size);
+                    $products = Product::where($where[0], $where[1])->whereIn('id', $pdtIdInSize)
+                                ->whereBetween('price', [$minPrice, $maxPrice])
+                                ->orderByDesc('id')->paginate(9);
+                    if ($request->sort) {                    
+                        $products = Product::where($where[0], $where[1])->whereIn('id', $pdtIdInSize)
+                        ->whereBetween('price', [$minPrice, $maxPrice])
+                        ->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+                    }
+
+                }elseif(($request->color != null) && ($request->size == null)){
+                    $pdtIdInColor = $this->pdtIdInColor($request->color);
+                    $products = Product::where($where[0], $where[1])->whereIn('id', $pdtIdInColor)
+                                ->whereBetween('price', [$minPrice, $maxPrice])
+                                ->orderByDesc('id')->paginate(9);
+                    if ($request->sort) {                    
+                        $products = Product::where($where[0], $where[1])->whereIn('id', $pdtIdInColor)
+                        ->whereBetween('price', [$minPrice, $maxPrice])
+                        ->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+                    }
+
+                }elseif(($request->color != null) && ($request->size != null)){
+                    $pdtIdInSize = $this->pdtIdInSize($request->size);
+                    $pdtIdInColor = $this->pdtIdInColor($request->color);
+                    $products = Product::where($where[0], $where[1])->whereIn('id', $pdtIdInColor)
+                                ->whereIn('id', $pdtIdInSize)->whereBetween('price', [$minPrice, $maxPrice])
+                                ->orderByDesc('id')->paginate(9);
+                    if ($request->sort) {                    
+                        $products = Product::where($where[0], $where[1])->whereIn('id', $pdtIdInColor)
+                        ->whereIn('id', $pdtIdInSize)->whereBetween('price', [$minPrice, $maxPrice])
+                        ->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+                    }
+
+                }
+            }
+
+        }
+
+        return $products;
+    }
+
+
+    private function productsQueryByNotAllButOrderBy($request, $where, $orderBy)
+    {
+        $orderBy = explode( '-', $request->orderBy );
+        $products = Product::where($where[0], $where[1])->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+        if ($request->price) {
+            $range = explode( ';', $request->price );
+            $minPrice = intval($range[0]);
+            $maxPrice = intval($range[1]);
+
+            if (($request->color == null) && ($request->size == null)) {
+                $products = Product::where($where[0], $where[1])->whereBetween('price', [$minPrice, $maxPrice])
+                            ->orderByDesc('id')->paginate(9);
+                if ($request->sort) {
+                    $products = Product::where($where[0], $where[1])->whereBetween('price', [$minPrice, $maxPrice])
+                                ->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+                }
+                
+            }elseif(($request->color == null) && ($request->size != null)){
+                $pdtIdInSize = $this->pdtIdInSize($request->size);
+                $products = Product::where($where[0], $where[1])->whereIn('id', $pdtIdInSize)
+                            ->whereBetween('price', [$minPrice, $maxPrice])
+                            ->orderByDesc('id')->paginate(9);
+                if ($request->sort) {
+                    $products = Product::where($where[0], $where[1])->whereIn('id', $pdtIdInSize)
+                    ->whereBetween('price', [$minPrice, $maxPrice])
+                    ->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+                }
+
+            }elseif(($request->color != null) && ($request->size == null)){
+                $pdtIdInColor = $this->pdtIdInColor($request->color);
+                $products = Product::where($where[0], $where[1])->whereIn('id', $pdtIdInColor)
+                            ->whereBetween('price', [$minPrice, $maxPrice])
+                            ->orderByDesc('id')->paginate(9);
+
+                if ($request->sort) {
+                    $products = Product::where($where[0], $where[1])->whereIn('id', $pdtIdInColor)
+                    ->whereBetween('price', [$minPrice, $maxPrice])
+                    ->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+                }
+
+            }elseif(($request->color != null) && ($request->size != null)){
+                $pdtIdInSize = $this->pdtIdInSize($request->size);
+                $pdtIdInColor = $this->pdtIdInColor($request->color);
+                $products = Product::where($where[0], $where[1])->whereIn('id', $pdtIdInColor)
+                            ->whereIn('id', $pdtIdInSize)->whereBetween('price', [$minPrice, $maxPrice])
+                            ->orderByDesc('id')->paginate(9);
+                if ($request->sort) {
+                    $products = Product::where($where[0], $where[1])->whereIn('id', $pdtIdInColor)
+                    ->whereIn('id', $pdtIdInSize)->whereBetween('price', [$minPrice, $maxPrice])
+                    ->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+                }
+
+            }
+        }
+
+        return $products;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+//     public function productFilter(Request $request)
+//     {
+//         //return $request->orderBy;
+//         $queryStr =  str_after($request->url, '?');
+//         $data = explode( '=', $queryStr );
+//         $orderBy = explode( '-', $request->orderBy );
+//         //return $data[0];
+//         if ($data[1] == 'all') {
+//             $products = Product::orderBy($orderBy[0], $orderBy[1])->paginate(9);
+//         }else{
+//             $products = Product::where($data[0], $data[1])->orderBy($orderBy[0], $orderBy[1])->paginate(9);
+            
+//         }
+        
+//         if ($request->ajax()) {
+//             if ($request->orderBy) {
+//                 return $view = view('frontend.shops.products', ['products' => $products]);
+//             }
+//     		$view = view('frontend.shops.products', ['products' => $products])->render();
+//             return response()->json(['html'=>$view]);
+//         }
+        
+//         // }else{
+//         //    $pdtByColor = ProductsColor::where('color', $request->color)->get();
+//         //    $unique_pdtId = $pdtByColor->unique('products_id');
+//         //    $pdtId = $unique_pdtId->pluck('products_id'); 
+
+//         //    $productBy = Product::whereIn('id', $pdtId)->where($data[0], $data[1])->whereBetween('price', [$request->min, $request->max])->orderBy($sort[0], $sort[1])->get();
+
+//         //}
+
+        
+//         //return view('frontend.shops.products', ['products' => $products]);
+//     }
+ }

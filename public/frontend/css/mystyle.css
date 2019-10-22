@@ -36,3 +36,8 @@
 .shop-page-product .product-thumb .product-imageblock a{
   height: 300px;
 }
+
+.active-manu{
+  background-color: #fa4251  !important;
+  color: #fff  !important;
+}

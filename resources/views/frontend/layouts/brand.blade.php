@@ -11,7 +11,7 @@
                   <div class="col-sm-12">
                     <div class="brand owl-carousel ptb_20">
                     @foreach($brands  as $brand)
-                      <div class="item text-center"> <a href="#"><img src="/{{ $brand->logo }}" alt="{{ $brand->name }}" class="img-responsive" /></a> </div>
+                      <div class="item text-center"> <a href="{{ route('shop', ['id' => 'brand_id-' . $brand->id]) }}"><img src="/{{ $brand->logo }}" alt="{{ $brand->name }}" class="img-responsive" /></a> </div>
                     @endforeach 
                     </div>
                   </div>

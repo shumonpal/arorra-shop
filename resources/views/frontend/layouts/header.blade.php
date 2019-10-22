@@ -23,14 +23,17 @@
             <div class="collapse navbar-collapse js-navbar-collapse">
               <ul id="menu" class="nav navbar-nav">
                 <li> <a href="{{url('/')}}">Home</a></li>
-                <li class="dropdown mega-dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Collection </a>
+                <li class="dropdown mega-dropdown">
+                    <a href="#" class="dropdown-toggle {{ strpos(request()->query('id'), 'category_id') !== false  ? 'active-manu' : '' }}" data-toggle="dropdown">
+                    Collection
+                    </a>
                   <ul class="dropdown-menu mega-dropdown-menu row">
                   @foreach($categories->take(4) as $category)
                     <li class="col-md-2">
                       <ul>
                         <li class="dropdown-header">{{$category->name}}</li>
                         @foreach($category->subcategories as $subcategory)
-                        <li><a href="{{ route('shop', ['id' => 'subcategory_id-' . $subcategory->id]) }}">{{title_case($subcategory->name)}}</a></li>
+                        <li><a class="{{ request()->query('id') == 'subcategory_id-' . $subcategory->id ? 'active-manu' : '' }}" href="{{ route('shop', ['id' => 'subcategory_id-' . $subcategory->id]) }}">{{title_case($subcategory->name)}}</a></li>
                         @endforeach
                       </ul>
                     </li>
@@ -54,10 +57,14 @@
                 </li>
                
                 <!-- <li> <a href="blog_page.html">Blog</a></li> -->
-                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brand </a>
+                <li class="dropdown"> <a href="#" class="dropdown-toggle {{ strpos(request()->query('id'), 'brand_id') !== false  ? 'active-manu' : '' }}" data-toggle="dropdown">Brand </a>
                   <ul class="dropdown-menu">
                   @foreach($brands as $brand)
-                    <li> <a href="{{ route('shop', ['id' => 'brand_id-' . $brand->id]) }}">{{ title_case($brand->name) }}</a></li>
+                    <li> 
+                      <a href="{{ route('shop', ['id' => 'brand_id-' . $brand->id]) }}" class="{{ request()->query('id') == 'brand_id-' . $brand->id ? 'active-manu' : '' }}">
+                        {{ title_case($brand->name) }}
+                      </a>
+                    </li>
                   @endforeach
                   </ul>
                 </li>

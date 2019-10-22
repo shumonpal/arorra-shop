@@ -179,7 +179,7 @@ a {
     -o-transition: all 0.25s ease 0s;
 }
 a:hover, a:focus {
-    color: #000;
+    color: #ececec;;
     text-decoration: none;
     transition: all 0.25s ease 0s;
     -moz-transition: all 0.25s ease 0s;

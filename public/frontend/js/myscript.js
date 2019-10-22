@@ -305,26 +305,66 @@ function showConfirmModal(title, url){
         //console.log($('.size').val())
     });
     
-
+  
     /*------------------------------------------
 	               products filter
 	 -------------------------------------------*/
 	$('body').on('click','.refine-products', function(evt) {
         evt.preventDefault();
         
-		//alert($("input[name=my_range]").val());
 		var me = $(this),
 			url = me.data('url'),
 			price = $("input[name=my_range]").val(),
-			color = $('.color').val();
-            size = $('.size').val(),
-            
-            ChangeUrl('url', url+'&price='+price+'&color='+color+'&size='+size);
-            location.reload();	
-            
-            ChangeUrl('url', "/");
+			color = $('.color').val(),
+            size = $('.size').val();
+            //alert(size);
+        let searchParams = new URLSearchParams(window.location.search);
 
-		
+        if (searchParams.has('id')) {
+
+            var id = searchParams.get('id');
+
+            ChangeUrl('url', url+'?id='+id+'&price='+price+'&color='+color+'&size='+size);
+        }
+        if (searchParams.has('queryBy')) {
+
+            var id = searchParams.get('queryBy');
+
+            ChangeUrl('url', url+'?queryBy='+id+'&price='+price+'&color='+color+'&size='+size);
+
+            
+        }
+
+        location.reload();	
+
+    });
+    
+    
+    $('body').on('change', '.filter-sort', function(evt) {
+        evt.preventDefault();
+        
+		var me = $(this),
+			domain = me.data('url'),
+            url = window.location.href,
+            sort = me.val();
+
+
+        let searchParams = new URLSearchParams(window.location.search);
+        
+        var newParams = searchParams.toString();
+
+        console.log( searchParams.get('sort') );
+
+        if (searchParams.has('sort')) {
+            searchParams.set('sort', sort);
+            var newParams = searchParams.toString();
+            ChangeUrl('url', domain+'?'+newParams);
+        }else{
+
+            ChangeUrl('url', url+'&sort='+sort);
+        }
+        location.reload();	
+        
 
     });
     

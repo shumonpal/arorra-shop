@@ -12,7 +12,7 @@
       .inline-block li{
         display:inline-block;
       }
-  	</style>
+   </style>
 
 @endsection
 @section('content')
@@ -43,7 +43,7 @@
           </div>
           <div class="filter left-sidebar-widget mb_50">
             <div class="heading-part mtb_20 ">
-              <h2 class="main_title">Refinr Search</h2>
+              <h2 class="main_title">Refine Search</h2>
             </div>
               <!-- <input type="hidden" name="queryBy" value="all">
               <input type="hidden" name="id" value="{{ request()->query('id') }}">
@@ -61,67 +61,59 @@
                     <ul class="inline-block">
                       <li class="m-r-10">
                         <label class="color-filter" for="color-filter" style="background-color: white;"></label>
-                        <input class="checkbox-color-filter products-filter color" type="radio" name="color" value=""
-                           {{request()->query('color') == '' ? 'checked="checked"' : ''}}">                      
+                        <input class="checkbox-color-filter products-filter {{request()->query('color') == '' ? 'color' : ''}}" type="radio" name="color" value=""
+                           {{request()->query('color') == '' ? 'checked="checked"' : ''}}>                      
                       </li>
                       <li class="m-r-10">
                         <label class="color-filter" for="color-filter" style="background-color: black;"></label>
-                        <input class="checkbox-color-filter products-filter" type="radio" name="color" value="black"
-                         {{request()->query('color') == 'black' ? 'checked="checked"' : ''}}">                      
+                        <input class="checkbox-color-filter products-filter {{request()->query('color') == 'black' ? 'color' : ''}}"
+                         type="radio" name="color" value="black"
+                         {{request()->query('color') == 'black' ? 'checked="checked"' : ''}}>                      
                       </li>
                       <li class="m-r-10">
                         <label class="color-filter" for="color-filter" style="background-color: green;"></label>
-                        <input class="checkbox-color-filter products-filter" type="radio" name="color" value="green"
-                          {{request()->query('color') == 'green' ? 'checked="checked"' : ''}}">                      
+                        <input class="checkbox-color-filter products-filter {{request()->query('color') == 'green' ? 'color' : ''}}" type="radio" name="color" value="green"
+                          {{request()->query('color') == 'green' ? 'checked="checked"' : ''}}>                      
                       </li>
                       <li class="m-r-10">
                         <label class="color-filter" for="color-filter" style="background-color: red;"></label>
-                        <input class="checkbox-color-filter products-filter" type="radio" name="color" value="red"
-                          {{request()->query('color') == 'red' ? 'checked="checked"' : ''}}">                      
+                        <input class="checkbox-color-filter products-filter {{request()->query('color') == 'red' ? 'color' : ''}}" type="radio" name="color" value="red"
+                          {{request()->query('color') == 'red' ? 'checked="checked"' : ''}}>                      
                       </li>
                     </ul>
-                    <!-- <div id="filter-group1">
-                      <div class="checkbox">
-                        <label>
-                          <input value="" type="checkbox"> Red (10)</label>
-                      </div>
-                      <div class="checkbox">
-                        <label>
-                          <input value="" type="checkbox"> Green (06)</label>
-                      </div>
-                      <div class="checkbox ">
-                        <label>
-                          <input value="" type="checkbox"> Blue(09)
-                        </label>
-                      </div>
-                    </div> -->
                   </div>
+
                   <div class="list-group-item mb_10">
                     <label>Size</label>
                     <div id="filter-group3">
                       <div class="checkbox">
                         <label>
-                          <input class="filter-size size" value="" type="radio" name="size" checked="checked"> All (3)</label>
+                          <input class="filter-size {{request()->query('size') == '' ? 'size' : ''}}" value="" type="radio" name="size" 
+                          {{request()->query('size') == '' ? 'checked="checked"' : ''}}> All (3)</label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input class="filter-size" value="large" type="radio" name="size"> Big (3)</label>
+                          <input class="filter-size {{request()->query('size') == 'large' ? 'size' : ''}}" value="large" type="radio" name="size"
+                          {{request()->query('size') == 'large' ? 'checked="checked"' : ''}}> Big (3)</label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input class="filter-size" value="medium" type="radio" name="size"> Medium (2)</label>
+                          <input class="filter-size {{request()->query('size') == 'medium' ? 'size' : ''}}" value="medium" type="radio" name="size"
+                          {{request()->query('size') == 'medium' ? 'checked="checked"' : ''}}> Medium (2)</label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input class="filter-size" value="small" type="radio" name="size"> Small (1)</label>
+                          <input class="filter-size {{request()->query('size') == 'small' ? 'size' : ''}}" value="small" type="radio" name="size"
+                          {{request()->query('size') == 'small' ? 'checked="checked"' : ''}}> Small (1)</label>
                       </div>
                       <div class="checkbox">
                         <label>
-                          <input class="filter-size" value="x" type="radio" name="size"> Extra large (1)</label>
+                          <input class="filter-size {{request()->query('size') == 'red' ? 'size' : ''}}" value="x" type="radio" name="size"
+                          {{request()->query('size') == 'red' ? 'checked="checked"' : ''}}> Extra large (1)</label>
                       </div>
                     </div>
                   </div>
-                  <button type="button" class="btn  refine-products" data-url="{{request()->fullUrl()}}">Refine Search</button>
+                  <button type="button" class="btn  refine-products" data-url="{{request()->url()}}">Refine Search</button>
                 </div>
               </div>
           </div>
@@ -139,24 +131,23 @@
                     </div>
                 </div>
                 <div class="sort-wrapper pull-right">
-                    <label class="control-label" for="input-sort">Sort By :</label>
-                    <div class="sort-inner" style="padding:0 62px 0 0">
-                    <!-- <select id="input-sort" class="form-control select_item" 
-                       data-url="{{ Request::fullUrl() }}" data-href="{{ route('shop') }}">
-                        <option value="updated_at-desc" selected="selected">Default</option>
-                        <option value="name-asc">Name (A - Z)</option>
-                        <option value="name-desc">Name (Z - A)</option>
-                        <option value="price-asc">Price (Low &gt; High)</option>
-                        <option value="price-desc">Price (High &gt; Low)</option>
-                        <option value="DESC">Rating (Highest)</option>
-                        <option value="ASC">Rating (Lowest)</option>
-                   i </select>
-                    <span><i class="fa fa-angle-down" aria-hidden="true"></i></span> -->
+                    <label class="control-label" for="input-sort">Sort By : </label>
+                    <div class="sort-inner">
+                      <select id="input-sort" class="form-control filter-sort" style="color: #999;"
+                        data-url="{{ Request::url() }}">
+                          <option value="updated_at-desc" {{request()->query('sort') == 'updated_at-desc' ? 'selected="selected"' : ''}} > Default</option>
+                          <option value="name-asc" {{request()->query('sort') == 'name-asc' ? 'selected="selected"' : ''}}> Name (A - Z)</option>
+                          <option value="name-desc" {{request()->query('sort') == 'name-desc' ? 'selected="selected"' : ''}}> Name (Z - A)</option>
+                          <option value="price-asc" {{request()->query('sort') == 'price-asc' ? 'selected="selected"' : ''}}> Price (Low &gt; High)</option>
+                          <option value="price-desc" {{request()->query('sort') == 'updated_at-desc' ? 'selected="selected"' : ''}}> Price (High &gt; Low)</option>
+                          <option value="id-desc" {{request()->query('sort') == 'id-desc' ? 'selected="selected"' : ''}}> Rating (Highest)</option>
+                          <option value="id-asc" {{request()->query('sort') == 'id-asc' ? 'selected="selected"' : ''}}> Rating (Lowest)</option>
+                      </select>
                     <?php
                        $queryStr =  str_after(request()->fullUrl(), '?');
                        $data = explode('=', $queryStr );
                     ?>
-                    <ul class="header-top-right text-right">
+                    <!-- <ul class="header-top-right text-right">
                       <li class="dropdown"> <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" 
                         aria-expanded="false" role="button">Defafult <span class="caret"></span> </span>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -166,9 +157,9 @@
                           <li><a href="{{route('shop', [$data[0] => $data[1], 'orderBy' => 'price-desc'])}}">Price (High &gt; Low)</a></li>
                         </ul>
                       </li>
-                    </ul>
+                    </ul> -->
                     </div>
-
+                  <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
                     
                 </div>
             </div>
