@@ -69,6 +69,8 @@ function()
 		Route::get('/orders', 'Frontend\UserController@orders')->name('user_order');
 	});
 
+	Route::get('contact-us', 'Frontend\ContactController@index')->name('contactus');
+
 	
 });
 

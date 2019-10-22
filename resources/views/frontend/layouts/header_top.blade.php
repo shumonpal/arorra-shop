@@ -40,13 +40,13 @@
                     <li><a href="#">German</a></li>
                   </ul>
                 </li>
-                <li class="currency dropdown"> <span class="dropdown-toggle" id="dropdownMenu12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">Currency <span class="caret"></span> </span>
+                <!-- <li class="currency dropdown"> <span class="dropdown-toggle" id="dropdownMenu12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">Currency <span class="caret"></span> </span>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu12">
                     <li><a href="#">€ Euro</a></li>
                     <li><a href="#">£ Pound Sterling</a></li>
                     <li><a href="#">$ US Dollar</a></li>
                   </ul>
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>

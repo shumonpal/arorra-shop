@@ -69,8 +69,7 @@
                   </ul>
                 </li>
                 <li> <a href="{{ route('shop', ['queryBy' => 'all']) }}">Shop</a></li>
-                <li> <a href="about.html">About us</a></li>
-                <li> <a href="contact_us.html">Contact us</a></li>
+                <li> <a href="{{route('contactus')}}">Contact us</a></li>
               </ul>
             </div>
             <!-- /.nav-collapse -->

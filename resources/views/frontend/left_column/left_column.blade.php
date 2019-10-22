@@ -7,7 +7,6 @@
       @include('frontend.left_column.categories')
     </div>
   </div>
-  <div class="left_banner left-sidebar-widget mt_30 mb_40"> <a href="#"><img src="/frontend/images/left1.jpg" alt="Left Banner" class="img-responsive" /></a> </div>
   
   @include('frontend.left_column.top_products')
   
