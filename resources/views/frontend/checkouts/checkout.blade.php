@@ -1,6 +1,12 @@
 @extends('frontend.layouts.layout')
 
 @section('content')
+<style>
+    .panel-title a:hover,
+    a:focus {
+        color: red;
+    }
+</style>
 <!-- =====  CONTAINER START  ===== -->
 <div class="container">
     <div class="row ">
