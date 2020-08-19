@@ -14,65 +14,63 @@
 
 
 /**------------------------------
-*
-* Front end Route
-*
-*--------------------------------------*/
+ *
+ * Front end Route
+ *
+ *--------------------------------------*/
 Auth::routes();
 
 //Route with Localization
 Route::group(
-[
-	'prefix' => LaravelLocalization::setLocale(),
-	'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-],
-function()
-{
-	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
-	//Route::get('/home', 'HomeController@index');
-	Route::get('/portfolio', function () {
-	    return view('welcome');
-	});
-	Route::get('/', 'Frontend\ForntendController@index');
-	Route::get('/productDetails/{id}', 'Frontend\ForntendController@productDetails')->name('productDetails');
-	Route::match(['get', 'post'], '/shop', 'Frontend\ForntendController@shop')->name('shop');
-	//Route::get('/shop/product-filter', 'Frontend\ForntendController@productFilter')->name('product-filter');
-	
-	//users login/registration
-	//Route::get('user_login', 'ForntendController@userLogin')->name('user_login');
+	[
+		'prefix' => LaravelLocalization::setLocale(),
+		'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+	],
+	function () {
+		/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
+		//Route::get('/home', 'HomeController@index');
+		Route::get('/portfolio', function () {
+			return view('welcome');
+		});
+		Route::get('/', 'Frontend\ForntendController@index');
+		Route::get('/productDetails/{id}', 'Frontend\ForntendController@productDetails')->name('productDetails');
+		Route::match(['get', 'post'], '/shop', 'Frontend\ForntendController@shop')->name('shop');
+		//Route::get('/shop/product-filter', 'Frontend\ForntendController@productFilter')->name('product-filter');
 
-	// cart
-	Route::get('cart', 'Frontend\CartController@index')->name('cart');
-	Route::post('cart', 'Frontend\CartController@getCart')->name('cart');
-	Route::post('cart-delete/{id}', 'Frontend\CartController@deleteCart')->name('cart-delete');
+		//users login/registration
+		//Route::get('user_login', 'ForntendController@userLogin')->name('user_login');
 
-	// wishlisht
-	Route::get('wishlist', 'Frontend\WishlistController@index')->name('wishlist');
-	Route::post('wishlist', 'Frontend\WishlistController@getWishlist')->name('wishlist');
-	Route::post('wishlist-delete/{id}', 'Frontend\WishlistController@deleteCart')->name('wishlist-delete');
+		// cart
+		Route::get('cart', 'Frontend\CartController@index')->name('cart');
+		Route::post('cart', 'Frontend\CartController@getCart')->name('cart');
+		Route::post('cart-delete/{id}', 'Frontend\CartController@deleteCart')->name('cart-delete');
 
-	// checkout
-	//Route::group(['middleware' => 'customer'], function(){
+		// wishlisht
+		Route::get('wishlist', 'Frontend\WishlistController@index')->name('wishlist');
+		Route::post('wishlist', 'Frontend\WishlistController@getWishlist')->name('wishlist');
+		Route::post('wishlist-delete/{id}', 'Frontend\WishlistController@deleteCart')->name('wishlist-delete');
+
+		// checkout
+		//Route::group(['middleware' => 'customer'], function(){
 		//Route::group(['middleware' => 'emptyCart'], function(){
-			Route::get('checkout', 'Frontend\CheckoutController@checkout1')->name('checkout1');
-			Route::match(['post'], 'checkout', 'Frontend\CheckoutController@checkout2')->name('checkout2');
-			// Route::match(['get', 'post'], 'checkout-step-3', 'Frontend\CheckoutController@checkout3')->name('checkout3');
-			// Route::get('checkout-step-4', 'Frontend\CheckoutController@checkout4')->name('checkout4');
-			Route::post('/pay', 'Frontend\PaymentController@redirectToGateway')->name('pay'); 
-			Route::get('/payment/callback', 'Frontend\PaymentController@handleGatewayCallback');
-			Route::post('/payWithPaypal', 'Frontend\PaymentController@payWithPaypal')->name('payWithPaypal');
-			Route::get('/payWithPaypal/callback', 'Frontend\PaymentController@payWithPaypalCallback')->name('payWithPaypalCallback');
-			Route::post('/payWithStripe', 'Frontend\PaymentController@payWithStripe')->name('payWithStripe');
+		Route::get('checkout', 'Frontend\CheckoutController@checkout1')->name('checkout1');
+		Route::match(['post'], 'checkout', 'Frontend\CheckoutController@checkout2')->name('checkout2');
+		// Route::match(['get', 'post'], 'checkout-step-3', 'Frontend\CheckoutController@checkout3')->name('checkout3');
+		// Route::get('checkout-step-4', 'Frontend\CheckoutController@checkout4')->name('checkout4');
+		Route::post('/pay', 'Frontend\PaymentController@redirectToGateway')->name('pay');
+		Route::get('/payment/callback', 'Frontend\PaymentController@handleGatewayCallback');
+		Route::post('/payWithPaypal', 'Frontend\PaymentController@payWithPaypal')->name('payWithPaypal');
+		Route::get('/payWithPaypal/callback', 'Frontend\PaymentController@payWithPaypalCallback')->name('payWithPaypalCallback');
+		Route::post('/payWithStripe', 'Frontend\PaymentController@payWithStripe')->name('payWithStripe');
 		//});
-	//});
-	Route::group(['middleware' => 'auth'], function(){
-		Route::get('/orders', 'Frontend\UserController@orders')->name('user_order');
-	});
+		//});
+		Route::group(['middleware' => 'auth'], function () {
+			Route::get('/orders', 'Frontend\UserController@orders')->name('user_order');
+		});
 
-	Route::get('contact-us', 'Frontend\ContactController@index')->name('contactus');
-
-	
-});
+		Route::get('contact-us', 'Frontend\ContactController@index')->name('contactus');
+	}
+);
 
 
 
@@ -81,58 +79,48 @@ function()
 
 
 /**------------------------------
-*
-* Back end Route
-*
-*--------------------------------------*/
+ *
+ * Back end Route
+ *
+ *--------------------------------------*/
 
-Route::group(['prefix' => 'admin'],  function(){
-	Route::group(['middleware' => ['admin_guest']], function(){
+Route::group(['prefix' => 'admin'],  function () {
+	Route::group(['middleware' => ['admin_guest']], function () {
 
 		Route::get('/login', 'Admin\Auth\LoginController@showloginForm');
-		Route::post('/login', 'Admin\Auth\LoginController@login');			
-		Route::get('/registration', 'Admin\Auth\RegistrationController@showRegiForm');	
-		Route::post('/registration', 'Admin\Auth\RegistrationController@register');	
+		Route::post('/login', 'Admin\Auth\LoginController@login');
+		Route::get('/registration', 'Admin\Auth\RegistrationController@showRegiForm');
+		Route::post('/registration', 'Admin\Auth\RegistrationController@register');
 	});
-
-	
 });
 
-Route::group(['middleware' => ['admin']], function(){
+Route::group(['middleware' => ['admin']], function () {
 	Route::post('/admin/logout', 'Admin\Auth\LoginController@logout');
 });
 
 //Route with Localization
 
 Route::group(
-[
-	'prefix' => LaravelLocalization::setLocale(),
-	'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-],
-function()
-{
-	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
-	Route::group(['prefix' => 'admin'],  function(){
-		Route::group(['middleware' => ['admin']], function(){				
-			Route::get('/home', 'HomeController@index');
-			Route::get('/select', 'CategoryController@select')->name('select');				
-			Route::resource('categories', 'CategoryController');
-			Route::resource('brands', 'BrandController');
-			
-			Route::resource('subcategories', 'SubcategoryController');
-			Route::resource('compositions', 'CompositionController');
+	[
+		'prefix' => LaravelLocalization::setLocale(),
+		'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+	],
+	function () {
+		/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
+		Route::group(['prefix' => 'admin'],  function () {
+			Route::group(['middleware' => ['admin']], function () {
+				Route::get('/home', 'HomeController@index');
+				Route::get('/select', 'CategoryController@select')->name('select');
+				Route::resource('categories', 'CategoryController');
+				Route::resource('brands', 'BrandController');
 
-			Route::resource('products', 'ProductController');
-			
-			Route::resource('orders', 'OrderController');
-			
+				Route::resource('subcategories', 'SubcategoryController');
+				Route::resource('compositions', 'CompositionController');
+
+				Route::resource('products', 'ProductController');
+
+				Route::resource('orders', 'OrderController');
+			});
 		});
-	});
-});
-
-
-
-
-
-
-
+	}
+);

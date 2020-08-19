@@ -41,3 +41,7 @@
   background-color: #fa4251  !important;
   color: #fff  !important;
 }
+
+.active{
+  color: red !important;
+}

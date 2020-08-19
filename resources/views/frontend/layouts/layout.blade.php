@@ -1,4 +1,5 @@
-l<!DOCTYPE html>
+l
+<!DOCTYPE html>
 <!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="en">
 <!--<![endif]-->
@@ -37,17 +38,17 @@ l<!DOCTYPE html>
   <link rel="apple-touch-icon" sizes="114x114" href="/frontend/images/apple-touch-icon-114x114.png">
   <link rel="stylesheet" type="text/css" href="/frontend/css/mystyle.css">
 
-  
+
   <link rel="stylesheet" href="/dist/iziModal/css/iziModal.css">
   <link rel="stylesheet" href="/dist/iziToast/dist/css/iziToast.css">
 
 
-  
+
   <script src="/frontend/js/jQuery_v3.1.1.min.js"></script>
   <script src="/dist/iziModal/js/iziModal.js"></script>
   <script src="/dist/iziToast/dist/js/iziToast.js"></script>
   <script type="text/javascript">
-      window.Laravel = <?php echo json_encode([
+    window.Laravel = <?php echo json_encode([
           'csrfToken' => csrf_token(),
           ]); ?>;
       var CSRF_TOKEN = '{{csrf_token()}}';
@@ -56,24 +57,24 @@ l<!DOCTYPE html>
 
 <body>
 
- <!-- =====  LODER  ===== -->
- <div class="loder"></div>
+  <!-- =====  LODER  ===== -->
+  <div class="loder"></div>
   <div class="wrapper">
-    
+
     @include('frontend.layouts.welcome_modal')
     <!-- =====  HEADER START  ===== -->
     @include('frontend.layouts.welcome_modal')
 
     <header id="header">
-      
-        @include('frontend.layouts.header_top')
-        @include('frontend.layouts.header')
-      
+
+      @include('frontend.layouts.header_top')
+      @include('frontend.layouts.header')
+
     </header>
     <!-- =====  HEADER END  ===== -->
 
-@yield('content')
-    
+    @yield('content')
+
     <!-- =====  FOOTER START  ===== -->
     @include('frontend.layouts.footer')
     <!-- =====  FOOTER END  ===== -->
