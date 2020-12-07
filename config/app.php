@@ -186,9 +186,11 @@ return [
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
 
         //Srmklive\PayPal
-        Srmklive\PayPal\Providers\PayPalServiceProvider::class
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
 
         //Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
     ],
 

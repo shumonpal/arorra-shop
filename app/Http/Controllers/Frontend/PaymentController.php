@@ -42,13 +42,13 @@ class PaymentController extends Controller
     public function handleGatewayCallback()
     {
         $paymentDetails = Paystack::getPaymentData();
-
+        dd(Auth::user()) ;
         $order = Order::create([
             'payer_id' => $paymentDetails['data']['id'],
             'user_id' => $paymentDetails['data']['metadata']['user_id'],
             'invoice_id' => $paymentDetails['data']['reference'],
             'invoice_description' => 'None',
-            'payer_email' => auth()->user()->email,
+            'payer_email' => Auth::user()->email,
             'status' => $paymentDetails['data']['status'] == 'success' ? 1 : 0,
             'pay_method' => session('payment_method'),
             'shipping_method' => session('shipping_method'),
