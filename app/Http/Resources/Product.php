@@ -22,7 +22,7 @@ class Product extends Resource
             'up_price' => $this->up_price,
             'descp' => $this->descp,
             'in_stock' => $this->in_stock,
-            'brand' => new BrandResource($this->brand),
+            'brand' => new BrandResource($this->brands),
             'category' => new CategoryResource($this->category),
             'subcategory' => new SubcategoryResource($this->subcategory),
             'sizes' => SizeResource::collection($this->Size),

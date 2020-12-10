@@ -86,6 +86,7 @@ class Product extends Model
         'banner_image' => 'nullable'
     ];
 
+
     public function images()
     {
         return $this->hasMany('App\Models\ProductImage');
@@ -104,6 +105,16 @@ class Product extends Model
     public function brands()
     {
         return $this->belongsTo('App\Models\Brand', 'brand_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category', 'category_id');
+    }
+
+    public function subcategory()
+    {
+        return $this->belongsTo('App\Models\Subcategory', 'subcategory_id');
     }
  
 }
