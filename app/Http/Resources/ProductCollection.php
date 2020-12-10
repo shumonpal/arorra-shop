@@ -21,6 +21,7 @@ class ProductCollection extends Resource
             'up_price' => $this->up_price,
             //'descp' => $this->descp,
             'in_stock' => $this->in_stock,
+            'composition_id' => $this->composition_id,
             'brand' => new BrandResource($this->brands),
             // 'category' => new CategoryResource($this->category),
             // 'subcategory' => new SubcategoryResource($this->subcategory),
