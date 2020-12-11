@@ -13,7 +13,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return ProductCollection::collection(ModelsProduct::paginate(10));
+        return ProductCollection::collection(ModelsProduct::latest()->paginate(10));
         // return Product::collection(ModelsProduct::with(['category', 'sub category', 'brand', 'images', 'colors', 'sizes'])->paginate(10));
     }
 
@@ -28,15 +28,15 @@ class ProductController extends Controller
     }
     public function featured()
     {
-        return ProductCollection::collection(ModelsProduct::where('is_featured', 1)->paginate(10));
+        return ProductCollection::collection(ModelsProduct::where('is_featured', 1)->latest()->paginate(10));
     }
     public function weekDeals()
     {
-        return ProductCollection::collection(ModelsProduct::where('composition_id', 3)->paginate(10));
+        return ProductCollection::collection(ModelsProduct::where('composition_id', 3)->latest()->paginate(10));
     }
     public function specialDeals()
     {
-        return ProductCollection::collection(ModelsProduct::where('composition_id', 2)->paginate(10));
+        return ProductCollection::collection(ModelsProduct::where('composition_id', 2)->latest()->paginate(10));
     }
     public function related($id)
     {
