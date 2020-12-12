@@ -15,9 +15,10 @@ class CategoryResource extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'descp' => $this->descp,
-            'products_by_category_url' => url('api/products-by-category/'.$this->id),
+            'products_by_category_url' => url('api/products-by-category/' . $this->id),
         ];
     }
 }

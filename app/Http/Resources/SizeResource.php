@@ -15,6 +15,7 @@ class SizeResource extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'size' => $this->size,
         ];
     }

@@ -15,9 +15,10 @@ class SubcategoryResource extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'descp' => $this->descp,
-            'products_by_subcategory_url' => url('api/products-by-subcategory/'.$this->id),
+            'products_by_subcategory_url' => url('api/products-by-subcategory/' . $this->id),
         ];
     }
 }
