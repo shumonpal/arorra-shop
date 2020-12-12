@@ -45,7 +45,7 @@ class ProductController extends Controller
 
         if ($pdtBySubCats->count() > 3) {
             $related_products = $pdtBySubCats;
-        }else{
+        } else {
             $related_products = ModelsProduct::where('category_id', $product->category_id)->latest()->take(8)->get();
         }
         return ProductCollection::collection($related_products);
@@ -57,14 +57,11 @@ class ProductController extends Controller
         if ($request->queryBy == "all") {
 
             $products = $frnt_repo->productsQueryByAll($request);
+        } else {
 
-        }else{
-            
             $products = $frnt_repo->productsQueryByNotAll($request);
-
         }
 
         return ProductCollection::collection($products);
-
     }
 }
