@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::group([
 
-    'middleware' => ['api', 'cors'],
+    'middleware' => ['cors', 'api'],
     'prefix' => 'auth'
 
 ], function () {
@@ -24,7 +24,6 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
-
 });
 
 Route::group([
@@ -54,5 +53,4 @@ Route::group([
     //subcategory
     Route::get('subcategories', 'SubCategoryController@index');
     Route::get('products-by-subcategory/{id}', 'SubCategoryController@productsBysubcategory');
-
 });
