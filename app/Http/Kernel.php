@@ -34,13 +34,14 @@ class Kernel extends HttpKernel
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,            
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\HttpProtocal::class,
         ],
 
         'api' => [
             'throttle:60,1',
             'bindings',
+            'cors'
         ],
     ];
 
@@ -71,6 +72,6 @@ class Kernel extends HttpKernel
         'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
         // REDIRECTION MIDDLEWARE
 
-        'cors' => \App\Http\Middleware\Cors::class, 
+        'cors' => \App\Http\Middleware\Cors::class,
     ];
 }
