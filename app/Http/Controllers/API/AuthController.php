@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers\API;
 
+use App\User;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class AuthController extends Controller
 {
+
+    use RegistersUsers;
+
     /**
      * Create a new AuthController instance.
      *
@@ -92,5 +99,52 @@ class AuthController extends Controller
     public function guard()
     {
         return Auth::guard('api');
+    }
+
+
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        if ($token = $this->guard()->attempt($user->only(['email', 'password']))) {
+            return $this->respondWithToken($token);
+        }
+        return $this->registered($request, $user) ?: response()->json(['error' => 'Unauthorized'], 401);
+    }
+
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'phone' => 'string|max:1000',
+            'country' => 'string|max:1000',
+            'state' => 'string|max:1000',
+            'address' => 'string|max:1000',
+        ]);
+    }
+
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\User
+     */
+    protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'phone' => $data['phone'],
+            'country' => $data['country'],
+            'state' => $data['state'],
+            'address' => $data['address'],
+        ]);
     }
 }

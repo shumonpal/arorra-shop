@@ -49,7 +49,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             return view('frontend.modals.user_registration');
         }
         return view('auth.register');
@@ -94,7 +94,7 @@ class RegisterController extends Controller
     }
 
 
-     /**
+    /**
      * Handle a registration request for the application.
      *
      * @param  \Illuminate\Http\Request  $request
