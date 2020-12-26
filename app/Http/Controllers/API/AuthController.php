@@ -22,7 +22,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     /**
@@ -106,13 +106,10 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
+        //return $request->all();
+        $this->create($request->all());
 
-        event(new Registered($user = $this->create($request->all())));
-
-        if ($token = $this->guard()->attempt($user->only(['email', 'password']))) {
-            return $this->respondWithToken($token);
-        }
-        return $this->registered($request, $user) ?: response()->json(['error' => 'Unauthorized'], 401);
+        return $this->login($request);
     }
 
 
@@ -121,11 +118,11 @@ class AuthController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'phone' => 'string|max:1000',
-            'country' => 'string|max:1000',
-            'state' => 'string|max:1000',
-            'address' => 'string|max:1000',
+            'password' => 'required|string|min:6',
+            'phone' => 'nullable|max:1000',
+            'country' => 'nullable|max:1000',
+            'state' => 'nullable|max:1000',
+            'address' => 'nullable|max:1000',
         ]);
     }
 
@@ -141,10 +138,6 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'phone' => $data['phone'],
-            'country' => $data['country'],
-            'state' => $data['state'],
-            'address' => $data['address'],
         ]);
     }
 }
