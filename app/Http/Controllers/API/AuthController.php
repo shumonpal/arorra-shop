@@ -142,9 +142,9 @@ class AuthController extends Controller
         ]);
     }
 
-    protected function update($id, Request $request)
+    public function update($id, Request $request)
     {
-        // return $request->all();
+        return $request->all();
         $user = User::findOrFail($id);
         $user->update($request->all());
         return $user->refresh();
