@@ -113,6 +113,7 @@ class AuthController extends Controller
     }
 
 
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -139,5 +140,13 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    protected function update($id, Request $request)
+    {
+        // return $request->all();
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        return $user->refresh();
     }
 }
