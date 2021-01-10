@@ -23,7 +23,7 @@ class Product extends Resource
             'in_stock' => $this->in_stock,
             'brand' => $this->when($this->brands,  new BrandResource($this->brands)),
             'category' => $this->when($this->category,  new CategoryResource($this->category)),
-            'subcategory' => $this->when($this->category,  new SubcategoryResource($this->subcategory)),
+            'subcategory' => $this->when($this->subcategory,  new SubcategoryResource($this->subcategory)),
             'sizes' => $this->when($this->sizes, SizeResource::collection($this->sizes)),
             'colors' => $this->when($this->colors, ColorResource::collection($this->colors)),
             'images' => $this->when($this->images, ImageResource::collection($this->images)),

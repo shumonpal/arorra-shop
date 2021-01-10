@@ -18,6 +18,7 @@ class CategoryResource extends Resource
             'id' => $this->id,
             'name' => $this->name,
             'descp' => $this->descp,
+            'subcategories' => SubcategoryResource::collection($this->subcategories),
             'products_by_category_url' => url('api/products-by-category/' . $this->id),
         ];
     }
