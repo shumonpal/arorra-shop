@@ -19,4 +19,8 @@ class CategoryController extends Controller
     {
         return ProductCollection::collection(Product::where('category_id', $id)->paginate(10));
     }
+    public function categoryById($id)
+    {
+        return new CategoryResource(Category::findOrFail($id));
+    }
 }
