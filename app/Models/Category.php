@@ -18,7 +18,7 @@ class Category extends Model
     use SoftDeletes;
 
     public $table = 'categories';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -50,9 +50,6 @@ class Category extends Model
 
     public function subcategories()
     {
-       // return $this->belongsToMany('App\Role');
         return $this->belongsToMany('App\Models\Subcategory', 'category_subcategory');
     }
-
-    
 }
