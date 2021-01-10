@@ -54,5 +54,5 @@ Route::group([
     //subcategory
     Route::get('subcategories', 'SubcategoryController@index');
     // Route::get('subcategory-by-category/{id}', 'SubCategoryController@subcategoryBycategory');
-    Route::get('products-by-subcategory/{id}', 'SubCategoryController@productsBysubcategory');
+    Route::get('products-by-subcategory/{id}', 'SubcategoryController@productsBysubcategory');
 });
