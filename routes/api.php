@@ -33,6 +33,8 @@ Route::group([
 
 ], function () {
 
+    Route::get('order/{id}', 'OrderController@getOrder');
+    Route::post('order', 'OrderController@createOrder');
     //products
     Route::get('products', 'ProductController@index');
     Route::get('product/{id}', 'ProductController@show');
