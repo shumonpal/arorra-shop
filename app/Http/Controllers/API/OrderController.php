@@ -10,6 +10,7 @@ class OrderController extends Controller
 {
     public function createOrder(Request $request)
     {
+
         return $request->all();
         $order = Order::create([
             'payer_id' => $request['PAYERID'],
@@ -41,5 +42,6 @@ class OrderController extends Controller
 
     public function getOrder($id)
     {
+        return $id;
     }
 }
