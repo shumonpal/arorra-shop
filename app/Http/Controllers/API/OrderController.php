@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -14,17 +15,17 @@ class OrderController extends Controller
         return $request->all();
         $order = Order::create([
             'payer_id' => $request['PAYERID'],
-            'user_id' => auth()->user()->id,
-            'invoice_id' => $request['INVNUM'],
+            'user_id' => Auth::guard('api')->user()->id,
+            'invoice_id' => $request['invoice_id'],
             'invoice_description' => $request['DESC'],
-            'payer_email' => auth()->user()->email,
-            'status' => $request['ACK'] == 'success' ? 0 : 1,
-            'pay_method' => session('payment_method'),
-            'shipping_method' => session('shipping_method'),
-            'total' => $request['AMT'],
+            'payer_email' => Auth::guard('api')->user()->email,
+            'status' =>  1,
+            'pay_method' => $request['payment_method'],
+            'shipping_method' => $request['shipping_method'],
+            'total' => $request['total'],
         ]);
         $order_content = [];
-        foreach ($carts as $cart) {
+        foreach ($request->carts as $cart) {
             $order_content[] = [
                 'order_id' => $order->id,
                 'product_id' => $cart->id,
